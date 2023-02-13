@@ -1,0 +1,80 @@
+help = "Manage firewalld"
+
+########################################################
+
+[command.port]
+help = "Manage port access on the host"
+platform = ["Worker"]
+command = """
+carburator sudo firewall-cmd --zone={{ zone | default('public') }} \
+--{% if close %}remove{% else %}add{% endif %}-port={{ port }}/{% if udp %}
+udp
+{% else %}
+tcp
+{% endif %} --permanent
+"""
+
+[command.port.args.port]
+help = "Port number"
+value_is = "String" # Boolean | String | Array
+arg_index = 1
+required = true
+
+[command.port.args.zone]
+help = "Set firewalld zone to something other than 'public'"
+value_is = "String"
+
+[command.port.args.udp]
+help = "Set port protocol to UDP instead of TCP"
+value_is = "Boolean" # Boolean | String | Array
+
+[command.port.args.close]
+help = "Close the given port instead of opening"
+value_is = "Boolean" # Boolean | String | Array
+
+########################################################
+
+[command.forward]
+help = "Forward port on the host to another"
+platform = ["Worker"]
+command = """
+carburator sudo firewall-cmd \
+--{% if terminate %}
+remove
+{% else %}
+add
+{% endif %}-forward-port=port={{ from }}:proto={% if udp %}
+udp
+{% else %}
+tcp
+{% endif %}:toport={{ to }}{% not addr is empty %}
+:toaddr={{ addr }}
+{% endif %} \
+--permanent
+"""
+
+[command.forward.args.from]
+help = "Port number to forward from"
+value_is = "String" # Boolean | String | Array
+arg_index = 1
+required = true
+
+[command.forward.args.to]
+help = "Port number to forward to"
+value_is = "String" # Boolean | String | Array
+arg_index = 2
+required = true
+
+[command.forward.args.addr]
+help = "Forward to another IP address"
+value_is = "String" # Boolean | String | Array
+
+[command.forward.args.udp]
+help = "Set port protocol to UDP instead of TCP"
+value_is = "Boolean" # Boolean | String | Array
+
+[command.forward.args.terminate]
+help = "Terminate the given forwarding instead of creating it"
+value_is = "Boolean" # Boolean | String | Array
+
+########################################################
