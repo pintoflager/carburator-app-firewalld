@@ -6,7 +6,8 @@ role="$1"
 #
 #
 if [ "$role" = 'client' ]; then
-    # Silent exit, nothing to prepare on client.
+    carburator print terminal fyi \
+        "Firewalld installs nothing on client, skipping..."
     exit
 fi
 

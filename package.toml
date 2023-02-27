@@ -1,7 +1,7 @@
 name = "firewalld"
 version = "0.1.0"
 collection = "App"
-platforms = ["Worker", "Commander"]
+platforms = ["Server", "Client"]
 
 priority = 20
 provides = ["firewall"]
@@ -11,9 +11,10 @@ os_support = ["debian-10", "debian-11", "ubuntu-20.04", "ubuntu-22.04"]
 on_level = "Project" # *Proxy | Group | Project
 # count = 1 # How many nodes on the given level // leave empty for all
 message = """
-Firewall should be installed on all publicly accessable nodes to avoid unwanted \
-traffic on private remote ports. Firewall is managed automatically by other \
-applications and direct user input should be minimal.
+Firewall should be installed on all publicly accessable nodes to avoid unwanted
+traffic on private remote ports.
+Firewall is managed automatically by other applications and direct user input
+should be minimal.
 """
 
 # Requires dir /etc/firewalld to be available on the host node.
