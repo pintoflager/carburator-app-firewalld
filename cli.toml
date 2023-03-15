@@ -23,14 +23,17 @@ required = true
 [command.port.args.zone]
 help = "Set firewalld zone to something other than 'public'"
 value_is = "String"
+required = false
 
 [command.port.args.udp]
 help = "Set port protocol to UDP instead of TCP"
 value_is = "Boolean" # Boolean | String | Array
+required = false
 
 [command.port.args.close]
 help = "Close the given port instead of opening"
 value_is = "Boolean" # Boolean | String | Array
+required = false
 
 ########################################################
 
@@ -68,13 +71,16 @@ required = true
 [command.forward.args.addr]
 help = "Forward to another IP address"
 value_is = "String" # Boolean | String | Array
+required = false
 
 [command.forward.args.udp]
 help = "Set port protocol to UDP instead of TCP"
 value_is = "Boolean" # Boolean | String | Array
+required = false
 
 [command.forward.args.terminate]
 help = "Terminate the given forwarding instead of creating it"
 value_is = "Boolean" # Boolean | String | Array
+required = false
 
 ########################################################
