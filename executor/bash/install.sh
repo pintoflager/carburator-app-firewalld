@@ -16,8 +16,27 @@ fi
 #
 carburator print terminal info "Executing firewalld install script"
 
-carburator sudo apt update
-carburator sudo apt -y install firewalld
+# TODO: Untested below
+if carburator has program apt; then
+    carburator sudo apt update
+    carburator sudo apt -y install firewalld
+
+elif carburator has program pacman; then
+    carburator sudo pacman -Suy firewalld
+
+elif carburator has program yum; then
+    carburator sudo yum makecache --refresh
+    carburator sudo yum install firewalld
+
+elif carburator has program dnf; then
+    carburator sudo dnf makecache --refresh
+    carburator sudo dnf -y install firewalld
+
+else
+    carburator print terminal error \
+        "Unable to detect package manager from client node linux"
+    exit 120
+fi
 
 if carburator has program ufw; then
     carburator sudo ufw disable
