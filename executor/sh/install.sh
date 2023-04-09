@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env sh
 
 role="$1"
 
@@ -22,6 +22,7 @@ if carburator has program apt; then
     carburator sudo apt -y install firewalld
 
 elif carburator has program pacman; then
+    carburator sudo pacman update
     carburator sudo pacman -Suy firewalld
 
 elif carburator has program yum; then
