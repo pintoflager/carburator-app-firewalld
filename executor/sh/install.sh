@@ -8,7 +8,7 @@ role="$1"
 if [ "$role" = 'client' ]; then
     carburator print terminal fyi \
         "Firewalld installs nothing on client, skipping..."
-    exit
+    exit 0
 fi
 
 # App installation tasks on remote node.
