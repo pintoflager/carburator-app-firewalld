@@ -18,20 +18,20 @@ carburator print terminal info "Executing firewalld install script"
 
 # TODO: Untested below
 if carburator has program apt; then
-    carburator sudo apt update
-    carburator sudo apt -y install firewalld
+    apt-get -y update
+    apt-get -y install firewalld
 
 elif carburator has program pacman; then
-    carburator sudo pacman update
-    carburator sudo pacman -Suy firewalld
+    pacman update
+    pacman -Suy firewalld
 
 elif carburator has program yum; then
-    carburator sudo yum makecache --refresh
-    carburator sudo yum install firewalld
+    yum makecache --refresh
+    yum install firewalld
 
 elif carburator has program dnf; then
-    carburator sudo dnf makecache --refresh
-    carburator sudo dnf -y install firewalld
+    dnf makecache --refresh
+    dnf -y install firewalld
 
 else
     carburator print terminal error \
@@ -40,14 +40,14 @@ else
 fi
 
 if carburator has program ufw; then
-    carburator sudo ufw disable
+    ufw disable
 fi
 
-if ! carburator sudo firewall-cmd --state | grep -q 'running'; then
+if ! firewall-cmd --state | grep -q 'running'; then
     carburator print terminal error \
     "Installation of firewalld failed, service state is not 'running'"
     exit 120
 fi
 
 # Enable masquerading
-carburator sudo firewall-cmd --add-masquerade --permanent
+firewall-cmd --add-masquerade --permanent
