@@ -5,14 +5,14 @@ platforms = ["Server", "Client"]
 
 priority = 20
 provides = ["firewall"]
-os_support = ["debian-10", "debian-11", "ubuntu-20.04", "ubuntu-22.04"]
+os_support = []
 
 [recommend]
 on_level = "Project" # *Proxy | Cluster | Project
 # count = 1 # How many nodes on the given level // leave empty for all
 message = """
 Firewall should be installed on all publicly accessable nodes to avoid unwanted
-traffic on private remote ports.
+traffic on node's public network interface ports.
 Firewall is managed automatically by other applications and direct user input
 should be minimal.
 """

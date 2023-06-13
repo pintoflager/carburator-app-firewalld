@@ -11,10 +11,10 @@ if [ "$role" = 'client' ]; then
     exit 0
 fi
 
-# App installation tasks on remote node.
+# App installation tasks on remote node. Runs as root.
 #
 #
-carburator print terminal info "Executing firewalld install script"
+carburator print terminal info "Executing firewalld register script"
 
 # TODO: Untested below
 if carburator has program apt; then

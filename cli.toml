@@ -6,7 +6,7 @@ help = "Manage firewalld"
 help = "Manage port access on the host"
 platform = ["Server"]
 command = """
-carburator sudo firewall-cmd --zone={{ zone | default('public') }} \
+sudo firewall-cmd --zone={{ zone | default('public') }} \
 --{% if close %}remove{% else %}add{% endif %}-port={{ port }}/{% if udp %}
 udp
 {% else %}
@@ -41,7 +41,7 @@ required = false
 help = "Forward port on the host to another"
 platform = ["Server"]
 command = """
-carburator sudo firewall-cmd \
+sudo firewall-cmd \
 --{% if terminate %}
 remove
 {% else %}
