@@ -6,7 +6,7 @@ role="$1"
 #
 #
 if [ "$role" = 'client' ]; then
-    carburator print terminal fyi \
+    carburator log debug \
         "Firewalld installs nothing on client, skipping..."
     exit 0
 fi
@@ -14,7 +14,7 @@ fi
 # App installation tasks on remote node. Runs as root.
 #
 #
-carburator print terminal info "Executing firewalld register script"
+carburator log info "Executing firewalld register script"
 
 # TODO: Untested below
 if carburator has program apt; then
@@ -34,7 +34,7 @@ elif carburator has program dnf; then
     dnf -y install firewalld
 
 else
-    carburator print terminal error \
+    carburator log error \
         "Unable to detect package manager from client node linux"
     exit 120
 fi
@@ -44,7 +44,7 @@ if carburator has program ufw; then
 fi
 
 if ! firewall-cmd --state | grep -q 'running'; then
-    carburator print terminal error \
+    carburator log error \
     "Installation of firewalld failed, service state is not 'running'"
     exit 120
 fi
