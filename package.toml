@@ -8,7 +8,7 @@ provides = ["firewall"]
 os_support = []
 
 [recommend]
-on_level = "Project" # *Proxy | Cluster | Project
+scope = "Project" # *Proxy | Cluster | Project
 # count = 1 # How many nodes on the given level // leave empty for all
 message = """
 Firewall should be installed on all publicly accessable nodes to avoid unwanted
